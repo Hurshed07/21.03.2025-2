@@ -10,21 +10,23 @@ private:
     int damage;
     string type;
 
-    static int totalHealth;
-    static int totalDamage;
+    static int totalHealth; 
+    static int totalDamage;  
 
 public:
-    BattleUnit(int health, int damage, const string& type)
-        : health(health), damage(damage), type(type) 
-    {
-        this->totalHealth += this->health;
-        this->totalDamage += this->damage;
+    BattleUnit(int health, int damage, const string& type) {
+        this->health = health;
+        this->damage = damage;
+        this->type = type;
+
+        totalHealth += this->health;
+        totalDamage += this->damage;
     }
 
     ~BattleUnit() 
     {
-        this->totalHealth -= this->health;
-        this->totalDamage -= this->damage;
+        totalHealth -= this->health;
+        totalDamage -= this->damage;
     }
 
     int getHealth() const { return this->health; }
@@ -36,59 +38,65 @@ public:
 
     void setHealth(int newHealth) 
     {
-        this->totalHealth -= this->health;
-        this->health = newHealth;
-        this->totalHealth += this->health;
+        totalHealth -= this->health;  
+        this->health = newHealth;     
+        totalHealth += this->health;  
     }
 
     void setDamage(int newDamage) 
     {
-        this->totalDamage -= this->damage;
-        this->damage = newDamage;
-        this->totalDamage += this->damage;
+        totalDamage -= this->damage;  
+        this->damage = newDamage;     
+        totalDamage += this->damage;  
     }
 
     void increaseHealth(int amount) 
     {
-        this->totalHealth += amount;
         this->health += amount;
+        totalHealth += amount;
     }
 
     void decreaseHealth(int amount) 
     {
-        if (amount > this->health) {
-            this->totalHealth -= this->health;
+        if (amount > this->health) 
+        {
+            totalHealth -= this->health;
             this->health = 0;
         }
-        else {
-            this->totalHealth -= amount;
+        else 
+        {
+            totalHealth -= amount;
             this->health -= amount;
         }
     }
 
-    void increaseDamage(int amount)
+    void increaseDamage(int amount) 
     {
-        this->totalDamage += amount;
         this->damage += amount;
+        totalDamage += amount;
     }
 
     void decreaseDamage(int amount) 
     {
-        if (amount > this->damage) {
-            this->totalDamage -= this->damage;
+        if (amount > this->damage) 
+        {
+            totalDamage -= this->damage;
             this->damage = 0;
         }
-        else {
-            this->totalDamage -= amount;
+        else 
+        {
+            totalDamage -= amount;
             this->damage -= amount;
         }
     }
 
-    void printInfo() const {
+    void printInfo() const 
+    {
         cout << "Type: " << this->type << ", Health: " << this->health << ", Damage: " << this->damage << endl;
     }
 
-    static void printArmyStats() {
+    static void printArmyStats() 
+    {
         cout << "Total Army Health: " << totalHealth << ", Total Army Damage: " << totalDamage << endl;
     }
 };
@@ -98,6 +106,8 @@ int BattleUnit::totalDamage = 0;
 
 int main() 
 {
+    setlocale(LC_ALL, "Ru");
+
     BattleUnit unit1(100, 20, "Warrior");
     BattleUnit unit2(80, 15, "Archer");
 
